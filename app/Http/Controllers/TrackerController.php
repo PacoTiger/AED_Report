@@ -37,8 +37,10 @@ class TrackerController extends Controller
     public function index($day) 
     {
         $trackers = Tracker::all()->where('day', '=', $day);
-        //dd($trackers);
+        $at9s = $trackers->where('time', '=', '09:00:00');
+        //dd($trackers, $at9s);
 
-        return view('indexTracker', ['trackers' => $trackers]);
+        return view('table', ['trackers' => $trackers,
+                              'at9s' => $at9s]);
     }
 }
