@@ -33,4 +33,12 @@ class TrackerController extends Controller
             }
         });
     }
+
+    public function index() 
+    {
+        $trackers = Tracker::all()->where('day', '=', '2017-09-01');
+        //dd($trackers);
+
+        return view('indexTracker', ['trackers' => $trackers]);
+    }
 }

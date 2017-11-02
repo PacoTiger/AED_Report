@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::get('import', 'TrackerController@import');
+Route::get('index', 'TrackerController@index');

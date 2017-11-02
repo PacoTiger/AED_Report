@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+class Tracker extends Model
 {
     protected $fillable = ['day',
                             'time',
@@ -18,4 +19,5 @@ use Illuminate\Database\Eloquent\Model;
                             'tAvg',
                             'iSecondsAvg'
                             ];
+
 }
