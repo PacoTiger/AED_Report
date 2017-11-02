@@ -16,4 +16,4 @@ Route::get('/', function () {
 });
 
 Route::get('import', 'TrackerController@import');
-Route::get('index', 'TrackerController@index');
+Route::get('index/{day}', 'TrackerController@index');

@@ -34,9 +34,9 @@ class TrackerController extends Controller
         });
     }
 
-    public function index() 
+    public function index($day) 
     {
-        $trackers = Tracker::all()->where('day', '=', '2017-09-01');
+        $trackers = Tracker::all()->where('day', '=', $day);
         //dd($trackers);
 
         return view('indexTracker', ['trackers' => $trackers]);
