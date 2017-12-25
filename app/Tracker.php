@@ -12,7 +12,7 @@ class Tracker extends Model
                             'speaker',
                             'segmentation',
                             'lead',
-                            'call',
+                            'outcall',
                             'tMinute',
                             'deal',
                             'iSegundos',

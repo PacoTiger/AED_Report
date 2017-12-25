@@ -21,7 +21,7 @@ class CreateTrackersTable extends Migration
             $table->string('speaker');
             $table->string('segmentation',1);
             $table->integer('lead')->nullable();
-            $table->integer('call');
+            $table->integer('outcall');
             $table->time('tMinute');
             $table->integer('deal')->nullable();
             $table->integer('iSegundos')->nullable();

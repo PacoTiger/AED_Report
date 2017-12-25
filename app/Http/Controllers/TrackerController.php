@@ -23,7 +23,7 @@ class TrackerController extends Controller
                     'speaker' =>$tracker->speaker,
                     'segmentation' =>$tracker->s,
                     'lead' =>$tracker->l,
-                    'call' =>$tracker->c,
+                    'outcall' =>$tracker->c,
                     'tMinute' =>$tracker->t,
                     'deal' =>$tracker->d,
                     'iSegundos' =>$tracker->ts,
@@ -36,11 +36,71 @@ class TrackerController extends Controller
 
     public function index($day) 
     {
-        $trackers = Tracker::all()->where('day', '=', $day);
-        $at9s = $trackers->where('time', '=', '09:00:00');
-        //dd($trackers, $at9s);
+        $trackers = Tracker::all()
+                            ->where('day', $day)
+                            ->sortby('time')
+                            ->sortby('speaker')
+                            ->GroupBy('speaker');
 
-        return view('table', ['trackers' => $trackers,
-                              'at9s' => $at9s]);
+        $spLists = $trackers->keys()->sort();
+        $spLists = $spLists->nth(1);
+        
+
+
+
+        //dd($spLists, $trackers);
+        return view('table', ['trackers' => $trackers, 
+                              'spLists' => $spLists]);
+
+        /*$trackers = Tracker::all()
+                    ->where('day', '=', $day)
+                    ->sortBy('speaker');
+
+
+        
+        //$speakerLists = $trackers->pluck('speaker')->unique();
+        $speakerLists = DB::table('trackers')
+                                        ->orderBy('speaker')
+                                        ->get()
+                                        ->unique('speaker');
+        
+       
+        $at9s = $trackers->where('time', '=', '09:00:00');
+        $at10s = $trackers->where('time', '=', '10:00:00');
+        $at11s = $trackers->where('time', '=', '11:00:00');
+        $at12s = $trackers->where('time', '=', '12:00:00');
+        $at13s = $trackers->where('time', '=', '13:00:00');
+        $at14s = $trackers->where('time', '=', '14:00:00');
+        $at15s = $trackers->where('time', '=', '15:00:00');
+        $at16s = $trackers->where('time', '=', '16:00:00');
+
+        //$bySP1s = $trackers->where('speaker', '=', )
+        
+
+        $grouped = $trackers->mapToGroups(function ($item, $key) {
+                return [$item['speaker'] => $item['call']];
+            });*/
+        //dd($grouped, $at9s);
+
+        
+        //dd($trackers, $grouped, $speakersInTrackers, $at9s);
+        /*for($i = 0; $i < count($speakerLists); ++$i){
+            
+        };*/
+        //dd($at14andJordan);
+        //$prueba = $speakerLists->push($at9s);
+        
+        
+    /*    return view('table', ['trackers' => $trackers,
+                              'at9s' => $at9s,
+                              'at10s' => $at10s,
+                              'at11s' => $at11s,
+                              'at12s' => $at12s,
+                              'at13s' => $at13s,
+                              'at14s' => $at14s,
+                              'at15s' => $at15s,
+                              'at16s' => $at16s,
+                              'speakerLists' => $speakerLists,
+                          ]);*/
     }
 }
